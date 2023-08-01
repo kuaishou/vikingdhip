@@ -2,22 +2,51 @@ import React from 'react';
 import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
+import SubMenu from './components/Menu/subMenu';
 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Menu defaultIndex={0} className='menu-vertical' onSelect={(inde)=>{console.log(inde)}}>
-          <MenuItem index={0}>
+        <Menu defaultIndex='0' onSelect={(inde) => { console.log(inde) }} >
+          <MenuItem>
             cool link
           </MenuItem>
-          <MenuItem index={1}>
+          <MenuItem>
             cool link 2
           </MenuItem>
-          <MenuItem index={2}>
+          <MenuItem>
             cool link 3
           </MenuItem>
+          <SubMenu title='dropdown'>
+            <MenuItem >
+              dropdown1
+            </MenuItem>
+            <MenuItem >
+              dropdown2
+            </MenuItem>
+          </SubMenu>
+        </Menu>
+
+        <Menu defaultIndex='0' mode='vertical' defaultOpenSubMenus={['3']} onSelect={(inde) => { console.log(inde) }}>
+          <MenuItem>
+            cool link
+          </MenuItem>
+          <MenuItem>
+            cool link 2
+          </MenuItem>
+          <MenuItem>
+            cool link 3
+          </MenuItem>
+          <SubMenu title='dropdown'>
+            <MenuItem >
+              dropdown1
+            </MenuItem>
+            <MenuItem >
+              dropdown2
+            </MenuItem>
+          </SubMenu>
         </Menu>
 
 
