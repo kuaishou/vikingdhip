@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button size={ButtonSize.Large} onClick={() => { setShow(!show) }}>toggle</Button>
+        <Button size='lg' onClick={() => { setShow(!show) }}>toggle</Button>
         <Transition
           in={show}
           timeout={300}
@@ -45,7 +45,7 @@ function App() {
           animation='zoom-in-left'
           wrapper
         >
-          <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>A Large Button</Button>
+          <Button btnType='primary' size='lg'>A Large Button</Button>
         </Transition>
 
         <Icon icon='arrow-down' theme='primary' size='10x' />
@@ -94,11 +94,11 @@ function App() {
 
         <Button className='xing' onClick={(e) => { console.log(11) }} >hello</Button>
         <Button disabled>disabled Button</Button>
-        <Button btnType={ButtonType.Primary} size={ButtonSize.Large}>Primary</Button>
-        <Button btnType={ButtonType.Link} href='http://www.baidu.com' target='_blank'>Link</Button>
-        <Button btnType={ButtonType.Link} disabled href='http://www.baidu.com'>Link disabled</Button>
-        <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>Danger</Button>
-        <Button btnType={ButtonType.Default}>Default</Button>
+        <Button btnType='primary' size='lg'>Primary</Button>
+        <Button btnType='link' href='http://www.baidu.com' target='_blank'>Link</Button>
+        <Button btnType='link' disabled href='http://www.baidu.com'>Link disabled</Button>
+        <Button btnType='danger' size='sm'>Danger</Button>
+        <Button btnType='default'>Default</Button>
         {/* <Button btnType={ButtonType.Link} href="http://dummyurl">Link</Button> */}
       </header>
     </div>
