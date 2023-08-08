@@ -1,106 +1,51 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
-import Button, { ButtonType, ButtonSize } from './components/Button/button';
-import Menu from './components/Menu/menu';
-import MenuItem from './components/Menu/menuItem';
-import SubMenu from './components/Menu/subMenu';
-import Icon from './components/Icon/icon';
-import Transition from './components/Transition';
-library.add(fas);
+
+import { useEffect, useState } from 'react';
+import axios from "axios"
+import Upload from './components/Upload/upload';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { fas, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
+// library.add(fas);
 function App() {
-  const [show, setShow] = React.useState(true);
+  const [title, setTitle] = useState('你好邢浩东');
+
+  // useEffect(() => {
+  //   axios.get('http://jsonplaceholder.typicode.com/posts/1', {
+  //     headers: {
+  //       'X-Requested-With': 'XMLHttpRequest'
+  //     },
+  //     responseType: 'json'
+  //   }).then(resp => {
+  //     console.log(resp)
+  //     setTitle(resp.data.title)
+  //   })
+  // })
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files) {
+      const uploadedFile = files[0]
+      const formData = new FormData()
+      formData.append(uploadedFile.name, uploadedFile)
+      axios.post('http://jsonplaceholder.typicode.com/posts', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(resp => {
+        console.log(resp)
+      })
+    }
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <Button size='lg' onClick={() => { setShow(!show) }}>toggle</Button>
-        <Transition
-          in={show}
-          timeout={300}
-          animation='zoom-in-bottom'
-        >
-          <div>
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-            <p>
-              Edit <code>src/App.tsx</code> and save to reload.
-            </p>
-          </div>
-        </Transition>
-        <Transition
-
-          in={show}
-          timeout={300}
-          animation='zoom-in-left'
-          wrapper
-        >
-          <Button btnType='primary' size='lg'>A Large Button</Button>
-        </Transition>
-
-        <Icon icon='arrow-down' theme='primary' size='10x' />
-        <FontAwesomeIcon icon={faCoffee} size='10x' />
-        <Menu defaultIndex='0' onSelect={(inde) => { console.log(inde) }} >
-          <MenuItem>
-            cool link
-          </MenuItem>
-          <MenuItem>
-            cool link 2
-          </MenuItem>
-          <MenuItem>
-            cool link 3
-          </MenuItem>
-          <SubMenu title='dropdown'>
-            <MenuItem >
-              dropdown1
-            </MenuItem>
-            <MenuItem >
-              dropdown2
-            </MenuItem>
-          </SubMenu>
-        </Menu>
-
-        <Menu defaultIndex='0' mode='vertical' defaultOpenSubMenus={['3']} onSelect={(inde) => { console.log(inde) }}>
-          <MenuItem>
-            cool link
-          </MenuItem>
-          <MenuItem>
-            cool link 2
-          </MenuItem>
-          <MenuItem>
-            cool link 3
-          </MenuItem>
-          <SubMenu title='dropdown'>
-            <MenuItem >
-              dropdown1
-            </MenuItem>
-            <MenuItem >
-              dropdown2
-            </MenuItem>
-          </SubMenu>
-        </Menu>
-
-
-
-        <Button className='xing' onClick={(e) => { console.log(11) }} >hello</Button>
-        <Button disabled>disabled Button</Button>
-        <Button btnType='primary' size='lg'>Primary</Button>
-        <Button btnType='link' href='http://www.baidu.com' target='_blank'>Link</Button>
-        <Button btnType='link' disabled href='http://www.baidu.com'>Link disabled</Button>
-        <Button btnType='danger' size='sm'>Danger</Button>
-        <Button btnType='default'>Default</Button>
-        {/* <Button btnType={ButtonType.Link} href="http://dummyurl">Link</Button> */}
-      </header>
+      <div>
+      <Upload
+      action="https://jsonplaceholder.typicode.com/posts"
+      onProgress={(res)=>{console.log('onProgress',res)}}
+      onSuccess={(res)=>{console.log('onSuccess',res)}}
+      onError={(res)=>{console.log('onError',res)}}
+    />
+      </div>
     </div>
   );
 }
