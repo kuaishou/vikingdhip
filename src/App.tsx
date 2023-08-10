@@ -2,6 +2,11 @@
 import { useEffect, useState } from 'react';
 import axios from "axios"
 import Upload from './components/Upload/upload';
+import Form from './components/Form/form';
+import Input from './components/Input';
+import FormItem from './components/Form/formItem';
+import Button from './components/Button/button';
+// import Form from './components/IFormnput';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import { fas, faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
@@ -9,43 +14,20 @@ import Upload from './components/Upload/upload';
 function App() {
   const [title, setTitle] = useState('你好邢浩东');
 
-  // useEffect(() => {
-  //   axios.get('http://jsonplaceholder.typicode.com/posts/1', {
-  //     headers: {
-  //       'X-Requested-With': 'XMLHttpRequest'
-  //     },
-  //     responseType: 'json'
-  //   }).then(resp => {
-  //     console.log(resp)
-  //     setTitle(resp.data.title)
-  //   })
-  // })
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files
-    if (files) {
-      const uploadedFile = files[0]
-      const formData = new FormData()
-      formData.append(uploadedFile.name, uploadedFile)
-      axios.post('http://jsonplaceholder.typicode.com/posts', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(resp => {
-        console.log(resp)
-      })
-    }
-  }
-  
   return (
     <div className="App">
-      <div>
-      <Upload
-      action="https://jsonplaceholder.typicode.com/posts"
-      onProgress={(res)=>{console.log('onProgress',res)}}
-      onSuccess={(res)=>{console.log('onSuccess',res)}}
-      onError={(res)=>{console.log('onError',res)}}
-    />
-      </div>
+      {title}
+      <Form name='viking-form' onSubmit={(e) => { e.preventDefault(); console.log('submit') }}>
+        <FormItem label='用户名' name='name'>
+          <Input />
+        </FormItem>
+        <FormItem label='密码' name='password'>
+          <Input type="password" />
+        </FormItem>
+        <div className='viking-form-submit-area'>
+          <Button type="submit" btnType='primary'>登陆</Button>
+        </div>
+      </Form>
     </div>
   );
 }
