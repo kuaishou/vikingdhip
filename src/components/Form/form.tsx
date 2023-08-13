@@ -14,14 +14,15 @@ export interface FormState {
     formError: { [K: string]: string[] };
     // formRules: { [K: string]: FormRule[] };
 }
-export type IFormContext = Pick<ReturnType<typeof useStore>, 'dispatch'>
+export type IFormContext = Pick<ReturnType<typeof useStore>, 'dispatch'|'fields'>
 export const FormContext = createContext<IFormContext>({} as IFormContext)
 
 export const Form: FC<FormProps> = (props) => {
     const { name, children, onSubmit, className, style } = props;
     const { form, fields, dispatch } = useStore();
     const passedContext: IFormContext = {
-        dispatch
+        dispatch,
+        fields
     }
     return (
         <>
